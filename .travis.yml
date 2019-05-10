@@ -1,0 +1,12 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sarinaditya/react-test -f ./client/Dockerfile.dev ./client
+
+after_success:
+  - docker build -t sarinaditya/multi-client ./client
+  - docker build -t sarinaditya/multi-nginx ./nginx
+  - docker build -t sarinaditya/multi-server ./server
+  - docker build -t sarinaditya/multi-worker ./worker
